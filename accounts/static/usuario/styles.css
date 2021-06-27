@@ -1,0 +1,48 @@
+body {
+  background-color: #0a194a;
+}
+
+.design {
+  display: block;
+}
+
+.first,
+.second {
+  background-image: url("/static/usuario/first.svg");
+  background-size: cover;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 200px;
+  height: auto;
+  opacity: 50%;
+}
+
+.second {
+  transform: scaleX(-1);
+  opacity: 80%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.form {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.head-wrapper {
+  height: 5rem;
+}
