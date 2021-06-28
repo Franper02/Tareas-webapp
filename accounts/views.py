@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import User
 
@@ -10,7 +11,10 @@ from .models import User
 
 
 def index(request):
-    return render(request, "usuario/index.html")
+    if request.user.is_authenticated:
+        return render(request, "usuario/index.html")
+    else:
+        return HttpResponseRedirect(reverse('acc:login'))
 
 
 def login_view(request):
