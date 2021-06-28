@@ -4,10 +4,12 @@ body {
 
 .design {
   display: block;
+  z-index: 1;
 }
 
 .first,
 .second {
+  z-index: 2;
   background-image: url("/static/usuario/first.svg");
   background-size: cover;
   position: absolute;

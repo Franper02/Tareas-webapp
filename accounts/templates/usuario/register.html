@@ -1,9 +1,8 @@
 {% extends "usuario/layout.html" %}
 
-
 {% load static %}
 
-{block titile} Iniciar sesion {endblock}
+{block titile} Registrarse {endblock}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'usuario/forms.css' %}">
@@ -12,7 +11,7 @@
 {% block header%}
 
 <div class="head">
-    <a href="{% url 'acc:register' %}" class="opcion">Registrarse
+    <a href="{% url 'acc:login' %}" class="opcion">Iniciar Sesión
         <img class="flecha" src="{% static 'usuario/flecha2.svg' %}">
     </a>
 </div>
@@ -24,26 +23,30 @@
 
 
 <div class="text">
-    <h2>Iniciar sesión</h2>
+    <h2>Registrarse</h2>
 
 </div>
 
-{{mensaje}}
-
 
 <div class="login">
-    <form action="/login" method="POST">
+    <form action="/register" method="POST">
         {% csrf_token %}
         <div class="wrapper">
             <div class="input">
                 <input class="field" type="text" name="username" placeholder="Nombre de usuario">
             </div>
             <div class="input">
+                <input class="field" type="text" name="email" placeholder="Correo electronico">
+            </div>
+            <div class="input">
                 <input class="field"type="password" name="password" placeholder="Contraseña">
+            </div>
+            <div class="input">
+                <input class="field"type="password" name="confirmation" placeholder="Confirmar contraseña">
             </div>
         </div>
             <div class="boton">
-                <input type="submit" value="Iniciar sesión" class="button"> 
+                <input type="submit" value="Registrarse" class="button"> 
             </div>
     </form>
 </div>

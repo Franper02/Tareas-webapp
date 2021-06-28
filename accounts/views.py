@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.db import IntegrityError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
 
 from .models import User
 
@@ -12,7 +13,7 @@ def index(request):
     return render(request, "usuario/index.html")
 
 
-def login(request):
+def login_view(request):
     # Muestra la pagina si es solicitada con un GET
     if request.method == "GET":
         return render(request, "usuario/login.html")
@@ -29,20 +30,23 @@ def login(request):
         # si los datos coinciden, logea al usuario y lo redirecciona al index
         if user is not None:
             login(request, user)
-            return redirect("{% url 'acc:index'%}")
+            return HttpResponseRedirect(reverse("acc:index"))
 
         # sino los manda al login (agregar mensaje de error!!!)
         else:
-            return render(request, "usuario/login.html")
+            error = 'erraste wachin'
+            return render(request, "usuario/login.html", {
+                'mensaje': error
+            })
 
 
-def logout(request):
+def logout_view(request):
     # cierra la sesion
     logout(request)
-    return redirect("{% url 'acc:login' %}")
+    return HttpResponseRedirect(reverse('acc:login'))
 
 
-def register(request):
+def register_view(request):
     # guarda los datos enviados a traves del post en variables
     if request.method == "POST":
         username = request.POST["username"]
@@ -65,7 +69,7 @@ def register(request):
 
         # si el usuario es registrado, lo logea
         login(request, user)
-        return redirect("{% url 'acc:index' %}")
+        return HttpResponseRedirect(reverse('acc:index'))
 
     else:
         return render(request, "usuario/register.html")
